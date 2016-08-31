@@ -47,6 +47,15 @@ namespace WpfApplication.Model
             }
         }
 
+        public static PeopleModel[] GetPeoples()
+        {
+            var result = new PeopleModel[]
+            {
+                new PeopleModel() { FirstName="Ivan", LastName = "Baran" },
+                new PeopleModel() { FirstName="John", LastName = "Karder" }
+            };
 
+            return result;
+        }
     }
 }
