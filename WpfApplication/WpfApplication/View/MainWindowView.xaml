@@ -11,9 +11,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBox Width="150" Margin="5"/>
-            <TextBox Width="150" Margin="5"/>
-            <Button Content="Add"  Width="70" Margin="5"/>
+            <TextBox Width="150"  Text="{Binding TextProperty1, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Width="150"  Text="{Binding TextProperty2, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <Button Content="Add" Command="{Binding AddUserCommand}" CommandParameter="{Binding Text, ElementName=tb1}" Width="70" Margin="5"/>
             <Button Content="Click me" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Command="{Binding ClickCommand}"/>
         </StackPanel>
         <ListView  ItemsSource="{Binding Items}"  Margin="5" Grid.Row="1">
