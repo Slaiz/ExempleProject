@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using WpfApplication.ViewModel;
+﻿using System.Windows;
 
 namespace WpfApplication.View
 {

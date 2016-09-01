@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using WpfApplication.Model;
 
@@ -23,7 +15,7 @@ namespace WpfApplication.ViewModel
 
         public List<string> ItemsList
         {
-            get { return itemsList.Select(x => x.LastName + "  " + x.FirstName).ToList(); ; }
+            get { return itemsList.Select(x => x.LastName + "  " + x.FirstName).ToList(); }
         }
 
         string _textProperty1;
