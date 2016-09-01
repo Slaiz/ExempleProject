@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApplication.View.MainWindowView"
+﻿<Window x:Class="WpfApplication.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,20 +11,12 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBox Width="150"  Text="{Binding TextProperty1, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Width="150"  Text="{Binding TextProperty1, UpdateSourceTrigger=PropertyChanged}"  Margin="5" ToolTip=""/>
             <TextBox Width="150"  Text="{Binding TextProperty2, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
-            <Button Content="Add" Command="{Binding AddUserCommand}" CommandParameter="{Binding Text, ElementName=tb1}" Width="70" Margin="5"/>
+            <Button Content="Add" Command="{Binding AddCommand}" Width="70" Margin="5"/>
             <Button Content="Click me" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Command="{Binding ClickCommand}"/>
         </StackPanel>
-        <ListView  ItemsSource="{Binding Items}"  Margin="5" Grid.Row="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding LastName}" Margin="5"/>
-                        <TextBlock Text="{Binding FirstName}" Margin="5"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <ListBox  ItemsSource="{Binding ItemsList}"  Margin="5" Grid.Row="1">
+        </ListBox>
     </Grid>
 </Window>
