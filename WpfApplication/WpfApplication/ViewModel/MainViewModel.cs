@@ -1,6 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using WpfApplication.Model;
 
@@ -13,9 +21,9 @@ namespace WpfApplication.ViewModel
 
         private List<People> itemsList = new List<People>();
 
-        public List<string> ItemsList
+        public List<People> ItemsList
         {
-            get { return itemsList.Select(x => x.LastName + "  " + x.FirstName).ToList(); }
+            get { return itemsList; }
         }
 
         string _textProperty1;
@@ -49,7 +57,7 @@ namespace WpfApplication.ViewModel
                 if (_textProperty2 != value)
                 {
                     _textProperty2 = value;
-                    OnPropertyChanged("TextProperty1");
+                    OnPropertyChanged("TextProperty2");
                 }
             }
         }
@@ -62,11 +70,14 @@ namespace WpfApplication.ViewModel
 
         private void AddMethod()
         {
-            if (TextProperty1 == null || TextProperty2 == null)
+            if (TextProperty1 == "" || TextProperty2 == "")
                 {MessageBox.Show("Please write all fields"); return;}
 
             itemsList.Add(new People(TextProperty1, TextProperty2));
             OnPropertyChanged(nameof(ItemsList));
+
+            //TextProperty1 = "";
+            //TextProperty2 = "";
         }
 
         private void ClickMethod()
