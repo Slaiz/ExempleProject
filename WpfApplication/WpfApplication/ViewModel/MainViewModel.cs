@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Net.Http.Headers;
@@ -64,6 +65,7 @@ namespace WpfApplication.ViewModel
 
         public MainViewModel()
         {
+            itemsList.Add(new People("qwe","sad"));
             ClickCommand = new Command(arg => ClickMethod());
             AddCommand = new Command(arg => AddMethod());
         }

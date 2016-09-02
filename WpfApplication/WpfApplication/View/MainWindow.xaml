@@ -4,18 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="500">
+        Title="MainWindow" Height="400" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
-            <TextBox Width="150"  Text="{Binding TextProperty1, UpdateSourceTrigger=PropertyChanged}"  Margin="5" ToolTip=""/>
-            <TextBox Width="150"  Text="{Binding TextProperty2, UpdateSourceTrigger=PropertyChanged}" Margin="5"/>
+            <TextBox Text="{Binding TextProperty1, UpdateSourceTrigger=PropertyChanged}"  Height="30" Width="150" Margin="5"/>
+            <TextBox Text="{Binding TextProperty2, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150"  Margin="5"/>
             <Button Content="Add" Command="{Binding AddCommand}" Width="70" Margin="5"/>
-            <Button Content="Click me" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="75" Command="{Binding ClickCommand}"/>
+            <Button Content="Click me" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="70" Height="30" Command="{Binding ClickCommand}"/>
         </StackPanel>
-        <DataGrid  ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="130,0,0,0" VerticalAlignment="Top" Height="180" Width="229" Grid.Row="1"/>
+        <ListBox  ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" Margin="5" 
+                  VerticalAlignment="Top" Height="300" Width="750" Grid.Row="1">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding LastName}"/>
+                        <TextBlock Text="{Binding FirstName}" Grid.Column="1"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>

@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace WpfApplication.Model
 {
     public class People
@@ -29,5 +31,9 @@ namespace WpfApplication.Model
             set { _lastName = value; }
         }
 
+        public override string ToString()
+        {
+            return String.Format("{1}, {2}", LastName, FirstName);
+        }
     }
 }
