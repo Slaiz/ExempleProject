@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace WpfApplication.Model
 {
@@ -8,6 +6,7 @@ namespace WpfApplication.Model
     {
         private string _firstName;
         private string _lastName;
+        private byte[] _image;
 
         public People()
         {
@@ -15,10 +14,11 @@ namespace WpfApplication.Model
             LastName = "2";
         }
 
-        public People(string firstName, string lastName)
+        public People(string firstName, string lastName, byte[] image)
         {
             FirstName = firstName;
             LastName = lastName;
+            Image = image;
         }
 
         public string FirstName {
@@ -31,9 +31,13 @@ namespace WpfApplication.Model
             set { _lastName = value; }
         }
 
-        public override string ToString()
+        public byte[] Image
         {
-            return String.Format("{1}, {2}", LastName, FirstName);
+            get
+            {
+                return _image;
+            }
+            set { _image = value; }
         }
     }
 }

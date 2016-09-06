@@ -3,8 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:WpfApplication.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="800">
+    
+    <Window.Resources>
+        <viewModel:BmpConverter x:Key="converter" />
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -13,11 +19,12 @@
         <StackPanel Orientation="Horizontal">
             <TextBox Text="{Binding TextProperty1, UpdateSourceTrigger=PropertyChanged}"  Height="30" Width="150" Margin="5"/>
             <TextBox Text="{Binding TextProperty2, UpdateSourceTrigger=PropertyChanged}" Height="30" Width="150"  Margin="5"/>
-            <Button Content="Add" Command="{Binding AddCommand}" Width="70" Margin="5"/>
-            <Button Content="Click me" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="70" Height="30" Command="{Binding ClickCommand}"/>
+            <Image Source="{Binding ImagePathProperty, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="150"  Margin="5"/>
+            <Button Content="Upload photo" Command="{Binding UploadCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5"  Width="90" Height="30" />
+            <Button Content="Add" Command="{Binding AddCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Height="30" Width="70"/>
         </StackPanel>
         <ListBox  ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" Margin="5" 
-                  VerticalAlignment="Top" Height="300" Width="750" Grid.Row="1">
+                  VerticalAlignment="Top" Height="300" Width="750" Grid.Row="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="0,2">
@@ -25,8 +32,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding LastName}"/>
-                        <TextBlock Text="{Binding FirstName}" Grid.Column="1"/>
+                        <Image Source="{Binding Image, Converter={StaticResource converter}}" Height="30" Width="150"  Margin="5" Grid.Column="0"/>
+                        <TextBlock Text="{Binding LastName}" Grid.Column="1"/>
+                        <TextBlock Text="{Binding FirstName}" Grid.Column="2"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

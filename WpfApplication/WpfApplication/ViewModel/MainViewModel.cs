@@ -1,35 +1,35 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
+using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using WpfApplication.Model;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace WpfApplication.ViewModel
 {
-    class MainViewModel: BaseViewModel
+    class MainViewModel: PropertyChanger
     {
         public ICommand ClickCommand { get; set; }
         public ICommand AddCommand { get; set; }
+        public ICommand UploadCommand { get; set; }
 
-        private List<People> itemsList = new List<People>();
+        private ObservableCollection<People> itemsList = new ObservableCollection<People>();
 
-        public List<People> ItemsList
+        public ObservableCollection<People> ItemsList
         {
             get { return itemsList; }
         }
 
-        string _textProperty1;
+        private string _textProperty1;
 
-        string _textProperty2;
+        private string _textProperty2;
+
+        private string _imagePathProperty;
+
+        private byte[] _imageBytes;
 
         public string TextProperty1
         {
@@ -42,7 +42,7 @@ namespace WpfApplication.ViewModel
                 if (_textProperty1 != value)
                 {
                     _textProperty1 = value;
-                    OnPropertyChanged("TextProperty1");
+                    OnPropertyChanged(nameof(TextProperty1));
                 }
             }
         }
@@ -58,15 +58,34 @@ namespace WpfApplication.ViewModel
                 if (_textProperty2 != value)
                 {
                     _textProperty2 = value;
-                    OnPropertyChanged("TextProperty2");
+                    OnPropertyChanged(nameof(TextProperty2));
                 }
+            }
+        }
+
+        public string ImagePathProperty
+        {
+            get { return _imagePathProperty;}
+            set
+            {
+                _imagePathProperty = value;
+                OnPropertyChanged(nameof(ImagePathProperty));
+            }
+        }
+
+        public byte[] ImageBytes
+        {
+            get { return _imageBytes; }
+            set
+            {
+                _imageBytes = value;
+                OnPropertyChanged(nameof(ImageBytes));
             }
         }
 
         public MainViewModel()
         {
-            itemsList.Add(new People("qwe","sad"));
-            ClickCommand = new Command(arg => ClickMethod());
+            UploadCommand = new Command(arg => UploadMethod());
             AddCommand = new Command(arg => AddMethod());
         }
 
@@ -75,16 +94,35 @@ namespace WpfApplication.ViewModel
             if (TextProperty1 == "" || TextProperty2 == "")
                 {MessageBox.Show("Please write all fields"); return;}
 
-            itemsList.Add(new People(TextProperty1, TextProperty2));
+            itemsList.Add(new People(TextProperty1, TextProperty2, ImageBytes));
             OnPropertyChanged(nameof(ItemsList));
 
-            //TextProperty1 = "";
-            //TextProperty2 = "";
+            TextProperty1 = "";
+            TextProperty2 = "";           
         }
 
-        private void ClickMethod()
+        private void UploadMethod()
         {
-            MessageBox.Show("This is click command.");
+            OpenFileDialog f = new OpenFileDialog();
+            //f.InitialDirectory = "C:/Users/Public/Pictures/Sample Pictures";
+            f.Filter = "All Files|*.*|JPEGs|*.jpg|Bitmaps|*.bmp|GIFs|*.gif";
+            if (f.ShowDialog() == true)
+            {
+                ImagePathProperty = f.FileName;
+                ImageConverter(f.FileName);
+            }
+        }
+
+        private void ImageConverter(string path)
+        {
+            FileInfo fileInfo = new FileInfo(path);
+            long imageFileLength = fileInfo.Length;
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            if (br.ReadBytes((int) imageFileLength) != null)
+            {
+                ImageBytes = br.ReadBytes((int) imageFileLength);
+            }
         }
     }
 }
