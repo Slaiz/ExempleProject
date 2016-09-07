@@ -24,17 +24,21 @@
             <Button Content="Add" Command="{Binding AddCommand}" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5" Height="30" Width="70"/>
         </StackPanel>
         <ListBox  ItemsSource="{Binding ItemsList, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Stretch" Margin="5" 
-                  VerticalAlignment="Top" Height="300" Width="750" Grid.Row="2">
+                  VerticalAlignment="Top" Height="300" Width="750" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0,2">
+                    <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="{Binding Image, Converter={StaticResource converter}}" Height="30" Width="150"  Margin="5" Grid.Column="0"/>
-                        <TextBlock Text="{Binding LastName}" Grid.Column="1"/>
-                        <TextBlock Text="{Binding FirstName}" Grid.Column="2"/>
+                        <Border Margin="5" BorderBrush="Black" BorderThickness="1">
+                            <Image Source="{Binding Image}" Stretch="Fill" Width="50" Height="50" />
+                        </Border>
+                        <StackPanel Orientation="Horizontal" TextBlock.FontWeight="Bold" Grid.Column="1" Margin="5">
+                            <TextBlock Text="{Binding FirstName}" />
+                            <TextBlock Text="{Binding LastName}" Padding="3,0,0,0"/>
+                        </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>

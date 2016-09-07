@@ -119,7 +119,7 @@ namespace WpfApplication.ViewModel
             long imageFileLength = fileInfo.Length;
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             BinaryReader br = new BinaryReader(fs);
-            if (br.ReadBytes((int) imageFileLength) != null)
+            //if (br.ReadBytes((int) imageFileLength) != null)
             {
                 ImageBytes = br.ReadBytes((int) imageFileLength);
             }
