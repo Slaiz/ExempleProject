@@ -2,12 +2,11 @@
 using System.IO;
 using System.Windows.Input;
 using WpfApplication.Model;
-using MessageBox = System.Windows.MessageBox;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
-namespace WpfApplication.ViewModel
+namespace Photme_PortableLibrary.ViewModel
 {
-    class MainViewModel: PropertyChanger
+    class MainViewModel:PropertyChanger
     {
         public ICommand ClickCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -101,7 +100,6 @@ namespace WpfApplication.ViewModel
         private void UploadMethod()
         {
             OpenFileDialog f = new OpenFileDialog();
-            //f.InitialDirectory = "C:/Users/Public/Pictures/Sample Pictures";
             f.Filter = "All Files|*.*|JPEGs|*.jpg|Bitmaps|*.bmp|GIFs|*.gif";
             if (f.ShowDialog() == true)
             {
@@ -116,10 +114,7 @@ namespace WpfApplication.ViewModel
             long imageFileLength = fileInfo.Length;
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             BinaryReader br = new BinaryReader(fs);
-            //if (br.ReadBytes((int) imageFileLength) != null)
-            {
-                ImageBytes = br.ReadBytes((int) imageFileLength);
-            }
+            ImageBytes = br.ReadBytes((int) imageFileLength);
         }
     }
 }

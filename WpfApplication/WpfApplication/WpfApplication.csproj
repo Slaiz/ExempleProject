@@ -65,7 +65,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\People.cs" />
+    <Compile Include="Model\PhotoItem.cs" />
     <Compile Include="ViewModel\PropertyChanger.cs" />
     <Compile Include="ViewModel\Command.cs" />
     <Compile Include="ViewModel\BmpConverter.cs" />
