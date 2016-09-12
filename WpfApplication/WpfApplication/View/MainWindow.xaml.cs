@@ -9,7 +9,7 @@ namespace WpfApplication.View
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
     }
 }
