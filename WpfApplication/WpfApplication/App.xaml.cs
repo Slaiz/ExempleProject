@@ -11,12 +11,7 @@ namespace WpfApplication
     {
         public App()
         {
-            var mw = new MainWindow
-            {
-                DataContext = new MainViewModel()
-            };
 
-            mw.Show();
         }
     }
 }

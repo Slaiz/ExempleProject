@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using WpfApplication.Model;
+using WpfApplication.ViewModel;
 
 namespace WpfApplication.View
 {
@@ -7,9 +9,14 @@ namespace WpfApplication.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly MainViewModel _mainViewModel;
+
         public MainWindow()
         {
-            InitializeComponent();           
+            InitializeComponent();
+
+            _mainViewModel = new MainViewModel();
+            DataContext = _mainViewModel;
         }
     }
 }
