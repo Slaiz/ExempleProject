@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace WpfApplication.Model
 {
     public class PhotoItem
